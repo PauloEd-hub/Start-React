@@ -1,23 +1,48 @@
+import React, { useState } from 'react';
 import './App.css';
-import Person from './Person/Person'
+import Person from './Person/Person';
 
-function App() {
-  const state = {
+const App = props =>{
+ const [ personsState, setPersonsState ] = useState({
     persons: [
       {name: 'Max', age: 28},
       {name: 'Manu', age:17},
       {name: 'Stephanie', age: 36}
+    ],
+    otherStates: 'some other values'
+  });
 
-    ]
+  const switchNameHandler = () => {
+    //console.log("Was clikcked")
+    // Dont do this state.persons[0].name = 'Maximilian'
+    setPersonsState({
+     persons:[
+      {name: 'Maximilian', age: 28},
+      {name: 'Manu', age:47},
+      {name: 'Stephanie', age: 26}
+     ],
+     otherStates: personsState.otherStates
+     })
   }
+  
+
   return (
     <div className="App">
       <h2>Hello! I'm React App</h2>
       <p>This is really working</p>
-      <button>Switch name</button>
-      <Person name= {state.persons[0].name} age= {state.persons[0].age} />
-      <Person name={state.persons[1].name} age={state.persons[1].age}>My hobbie: Racing</Person>
-      <Person name={state.persons[2].name} age={state.persons[2].age}/>
+      <button onClick={switchNameHandler}>Switch name</button>
+      <Person 
+      name= {personsState.persons[0].name} 
+      age= {personsState.persons[0].age} 
+      />
+      <Person 
+      name={personsState.persons[1].name}
+       age={personsState.persons[1].age}>My hobbie: Racing
+       </Person>
+      <Person 
+      name={personsState.persons[2].name} 
+      age={personsState.persons[2].age}
+      />
     </div>
   );
 } 
